@@ -1,12 +1,15 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
+
 import passport from "./config/passport-config";
 import corsOptions from "./config/cors";
-import dotenv from "dotenv";
-import { CustomError } from "./lib/type";
-import indexRouter from "./routes/index.routes";
 
-dotenv.config();
+import { CustomError } from "./lib/type";
+
+import indexRouter from "./routes/index.routes";
 
 const app = express();
 app.use(cors(corsOptions));
