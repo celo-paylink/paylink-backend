@@ -1,5 +1,3 @@
-// uncomment the code below to use Prisma ORM and database queries and finish the implementation of the Google OAuth strategy
-
 import passport from "passport";
 import {
   Strategy as JwtStrategy,
