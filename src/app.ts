@@ -1,12 +1,19 @@
 import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
+import passport from "./config/passport-config";
+import corsOptions from "./config/cors";
 import dotenv from "dotenv";
 import { CustomError } from "./lib/type";
+
 dotenv.config();
 
 const app = express();
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(passport.initialize());
 
 app.get("/", (_req, res) => {
   res.send("Hello, Express + TypeScript!");
