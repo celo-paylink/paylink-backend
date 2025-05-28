@@ -4,6 +4,7 @@ import passport from "./config/passport-config";
 import corsOptions from "./config/cors";
 import dotenv from "dotenv";
 import { CustomError } from "./lib/type";
+import indexRouter from "./routes/index.routes";
 
 dotenv.config();
 
@@ -15,9 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 
-app.get("/", (_req, res) => {
-  res.send("Hello, Express + TypeScript!");
-});
+app.use("/api", indexRouter);
 
 // 404 handler
 app.use((req, res) => {
