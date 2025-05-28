@@ -172,11 +172,6 @@ npm start
 
 ---
 
-## 📄 License
-
-[MIT](LICENSE)
-
----
 
 ## 👨‍💻 Author
 
