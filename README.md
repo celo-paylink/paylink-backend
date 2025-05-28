@@ -32,7 +32,7 @@ src/
 ├── routes/             # Your route handlers
 ├── db/                 # database queries
 ├── config/             # Passport, Cloudinary, etc.
-└── lib/                # types and prisma client instance
+└── lib/                # types, jwt functions and prisma client instance
 
 ````
 
