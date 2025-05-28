@@ -1,5 +1,4 @@
 import { Router, Request, Response } from "express";
-import { signJWT, verifyJWT } from "../lib/jwt";
 
 const indexRouter = Router();
 
