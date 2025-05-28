@@ -21,3 +21,4 @@ logs/
 # Editor settings
 .vscode/
 .idea/
+/src/generated/prisma
