@@ -15,15 +15,13 @@ datasource db {
 }
 
 model User {
-  id                 String               @id @default(uuid())
-  email              String               @unique
-  username           String?              @unique
-  password           String? // hashed password for traditional login
-  googleId           String?              @unique
-  name               String?
-  bio                String?
-  avatar             String?
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  deletedAt          DateTime?
+  id             String    @id @default(uuid())
+  walletAddress  String    @unique
+  name           String?
+  role           String    @default("user")
+  nonce          String?
+  nonceExpiresAt DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
 }

@@ -2,11 +2,11 @@ import { AppError } from "../error/errorHandler";
 import { Prisma } from "../generated/prisma";
 import prisma from "../lib/prisma";
 
-export async function getUserByEmail(email: string) {
+export async function getUserByWallet(walletAddress: string) {
   try {
     const data = await prisma.user.findUnique({
       where: {
-        email,
+        walletAddress,
       },
     });
     return data;
@@ -15,27 +15,6 @@ export async function getUserByEmail(email: string) {
       console.error("Error occured while finding user by email", error.message);
     } else {
       console.error("Error occured while finding user by email", error);
-    }
-    throw new AppError("Internal server error", 500);
-  }
-}
-
-export async function getUserByUsername(username: string) {
-  try {
-    const data = await prisma.user.findUnique({
-      where: {
-        username,
-      },
-    });
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(
-        "Error occured while finding user by username",
-        error.message,
-      );
-    } else {
-      console.error("Error occured while finding user by username:", error);
     }
     throw new AppError("Internal server error", 500);
   }
@@ -54,27 +33,6 @@ export async function getUserById(id: string) {
       console.error("Error occured while finding user by id", error.message);
     } else {
       console.error("Error occured while finding user by id", error);
-    }
-    throw new AppError("Internal server error", 500);
-  }
-}
-
-export async function getUserByGoogleId(googleId: string) {
-  try {
-    const data = await prisma.user.findUnique({
-      where: {
-        googleId,
-      },
-    });
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(
-        "Error occured while finding user by google id",
-        error.message,
-      );
-    } else {
-      console.error("Error occured while finding user by google id", error);
     }
     throw new AppError("Internal server error", 500);
   }
