@@ -18,10 +18,15 @@ model User {
   id             String    @id @default(uuid())
   walletAddress  String    @unique
   name           String?
-  role           String    @default("user")
+  role           Role    @default(USER)
   nonce          String?
   nonceExpiresAt DateTime?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
+}
+
+enum Role {
+  USER
+  ADMIN
 }

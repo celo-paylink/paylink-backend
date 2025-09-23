@@ -2,7 +2,7 @@ import { AppError } from "../error/errorHandler";
 import { Prisma } from "../generated/prisma";
 import prisma from "../lib/prisma";
 
-export async function getUserByWallet(walletAddress: string) {
+export async function getUserByWalletAddress(walletAddress: string) {
   try {
     const data = await prisma.user.findUnique({
       where: {
@@ -38,10 +38,17 @@ export async function getUserById(id: string) {
   }
 }
 
-export async function createUser(values: Prisma.UserCreateInput) {
+export async function upsertUser(values: Prisma.UserCreateInput) {
   try {
-    const data = await prisma.user.create({
-      data: values,
+    const { walletAddress, nonce, nonceExpiresAt } = values;
+    const data = await prisma.user.upsert({
+      where: { walletAddress: values.walletAddress },
+      update: { nonce, nonceExpiresAt: nonceExpiresAt },
+      create: {
+        walletAddress: walletAddress,
+        nonce,
+        nonceExpiresAt: nonceExpiresAt,
+      },
     });
     return data;
   } catch (error) {
