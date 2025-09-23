@@ -17,6 +17,7 @@ export const userNonce = async (data: { walletAddress: string }) => {
   const nonce = generateNonce(12);
   const expiresAt = new Date(Date.now() + NONCE_TTL_MINUTES * 60 * 1000);
 
+  console.log(expiresAt);
   const values = {
     walletAddress: addr,
     nonce,
@@ -51,11 +52,14 @@ export const userVerfication = async (data: {
 
   const addr = ethers.getAddress(walletAddress);
   const user = await queries.getUserByWalletAddress(addr);
+
   if (!user || !user.nonce || !user.nonceExpiresAt) {
     throw new AppError("Nonce not found; request a nonce first", 400);
   }
 
-  if (new Date() > user.nonceExpiresAt) {
+  const nowMs = Date.now();
+  const expiryMs = new Date(user.nonceExpiresAt).getTime();
+  if (nowMs > expiryMs) {
     throw new AppError("nonce expired; request a new nonce", 400);
   }
 
