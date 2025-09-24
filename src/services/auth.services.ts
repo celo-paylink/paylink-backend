@@ -5,10 +5,10 @@ import { AppError } from "../error/errorHandler";
 import { signJWT } from "../lib/jwt";
 import prisma from "../lib/prisma";
 
-const NONCE_TTL_MINUTES = 5;
+const NONCE_TTL_MINUTES = 7;
 const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
 const ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
-const CHAIN_ID = Number(process.env.CHAIN_ID || 44787); // default to Alfajores
+const CHAIN_ID = Number(process.env.CHAIN_ID || 44787);
 
 export const userNonce = async (data: { walletAddress: string }) => {
   const { walletAddress } = data;
@@ -17,7 +17,6 @@ export const userNonce = async (data: { walletAddress: string }) => {
   const nonce = generateNonce(12);
   const expiresAt = new Date(Date.now() + NONCE_TTL_MINUTES * 60 * 1000);
 
-  console.log(expiresAt);
   const values = {
     walletAddress: addr,
     nonce,
